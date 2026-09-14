@@ -1,0 +1,19 @@
+.difficultyEasy{
+  color: green;
+}
+
+.difficultyModerate{
+  color: goldenrod;
+}
+
+.difficultyHard{
+  color: red;
+}
+
+.waterRequirement{
+  color: blue;
+}
+
+.sunRequirement{
+  color: orange;
+}

@@ -1,0 +1,13 @@
+:root {
+  --bg: white;
+  --app-font: Consolas, monaco, monospace;
+}
+
+body {
+  font-family: var(--app-font);
+}
+
+.image {
+  width: 20%;
+  height: 20%;
+}
