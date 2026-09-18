@@ -1,8 +1,8 @@
-import { Plant } from "../../data/plant";
-import UserPlant from "./user_plant";
+import { UserPlant } from "../../data/user_plant";
+import UserPlantDisplay from "./user_plant_display";
 
 interface PlantListParams {
-  plants : Plant[] | null
+  plants : UserPlant[] | null
 }
 
 export default function PlantList({ plants } : PlantListParams){
@@ -11,7 +11,7 @@ export default function PlantList({ plants } : PlantListParams){
       {
         plants && plants.length > 0 ? (
           plants.map((plant, index) => (
-            <UserPlant key={index} plant={plant} />
+            <UserPlantDisplay key={index} plant={plant} />
           ))
         ) : (
           <p>No plants to display</p>
