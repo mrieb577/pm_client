@@ -3,7 +3,6 @@ import "./plant_display.css"
 
 export default function PlantDisplay({ pd } : PlantParameter){
   let searchName = pd?.scientific_name.split(" ", 2).join("_");
-  console.log(searchName);
 
   if(pd != null){
     return(<div>

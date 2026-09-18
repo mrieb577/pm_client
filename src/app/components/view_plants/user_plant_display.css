@@ -1,0 +1,18 @@
+.userPlant {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.userPlant p {
+  margin: 0px;
+}
+
+.nickname {
+  font-weight: bold;
+  margin: 0px;
+}
+
+.actions button {
+  margin-right: 10px;
+}

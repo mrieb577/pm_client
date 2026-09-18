@@ -26,7 +26,7 @@ export function AddPlantForm({ pd } : PlantParameter){
     console.log(state);
 
     var headers = GetRequestHeaders();
-    axios.post("http://localhost:8080/plants/add", state, {...headers}).then((response) => {
+    axios.post("http://localhost:8080/user/plants/add", state, {...headers}).then((response) => {
       console.log(response);
     }).catch((err) => {console.error(err.message)});
   }
@@ -40,7 +40,7 @@ export function AddPlantForm({ pd } : PlantParameter){
   } else {
     return (<div>
       <h3 className="title">Add this plant:</h3>
-      <div> Species: <i>{pd.scientific_name}</i>: {pd.common_name} ({pd.symbol})</div>
+      <div> Species: <i>{pd.scientific_name}</i>: {pd.common_name}</div>
       <form onSubmit={handleSubmit}>
         <label> Nickname: <input type="text" name="nickname" onChange={handleChange} /> </label> <br/>
         <label> Date Acquired: <input type="date" name="dateAcquired" onChange={handleChange} /> </label> <br/>

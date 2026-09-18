@@ -8,13 +8,13 @@ type cafState = {
 }
 
 export default function CreateAccountForm(){
+  const [message, setMessage] = useState("");
   const [state, setState] = useState<cafState>({
     username: "",
     email: "",
     password: ""
   });
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordGood, setPasswordGood] = useState(true);
 
   function checkPassword(event: any){
     setConfirmPassword(event.target.value);
@@ -39,7 +39,6 @@ export default function CreateAccountForm(){
 
     if(confirmPassword === state.password && populated){
       console.log("Can register new user");
-      setPasswordGood(true);
 
       var pad = function(num: number) { return ('00' + num).slice(-2) };
       var date;
@@ -62,19 +61,22 @@ export default function CreateAccountForm(){
         }
       ).then((response) => {
         console.log(response);
-      }).catch((err) => {console.error(err.message)});
+        if(response.data.code === 200){
+          setMessage("Successfully created new user");
+        } else {
+          setMessage("Failed to create new user: " + response.data.message);
+        }
+      }).catch((err) => {
+        setMessage("Failed to create new user: " + err.message);
+      });
     } else {
-      console.log("Passwords do not match or one or more fields is empty");
-      setPasswordGood(false);
+      setMessage("Passwords do not match or one or more fields is empty");
     }
   }
 
   return (
     <div>
-      { !passwordGood ?
-        <p>The passwords do not match</p>
-        : <div></div>
-      }
+      <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <label> Username: <input type="text" name="username" onChange={handleChange} /> </label> <br/>
         <label> Email: <input type="text" name="email" onChange={handleChange} /> </label> <br/>

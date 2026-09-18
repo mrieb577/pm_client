@@ -14,11 +14,10 @@ export default function PlantSearchForm(){
 
   const [resultIndex, setResultIndex] = useState(0);
 
-  function makeServerRequest(){
+  function makeServerRequest(value = search){
     setMessage("");
     const headers = GetRequestHeaders();
-    axios.get(`http://localhost:8080/plants/search?val=${search}`, {...headers}).then((response) => {
-      console.log(response);
+    axios.get(`http://localhost:8080/plants/search?val=${value}`, {...headers}).then((response) => {
       setResults(response.data.results as Plant[]);
       setResultSize(response.data.count);
       setResultIndex(0);
@@ -45,13 +44,16 @@ export default function PlantSearchForm(){
       }
 
       <p className="title">Search</p>
-      <input type='text' onChange={(e) => {
-        setSearch(e.target.value);
-      }}></input>
-
-      <button onClick={() => {
-        makeServerRequest();
-      }}>Search</button>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        const input = e.currentTarget.elements.namedItem("plant-search") as HTMLInputElement | null;
+        const nextSearch = input?.value ?? "";
+        setSearch(nextSearch);
+        makeServerRequest(nextSearch);
+      }}>
+        <input name="plant-search" type="text" placeholder="Search for a plant" />
+        <button type="submit">Search</button>
+      </form>
     </div>
   );
 }
